@@ -1,5 +1,6 @@
-for _ in range(int(input())):
-  inp = input().split()
+import sys
+for _ in range(int(sys.stdin.readline().rstrip())):
+  inp = sys.stdin.readline().rstrip().split()
   T = int(inp[0])
   students = list(map(int, inp[1:]))
 
