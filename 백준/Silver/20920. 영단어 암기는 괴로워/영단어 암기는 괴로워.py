@@ -5,10 +5,10 @@ words = {}
 for _ in range(N):
   word = sys.stdin.readline().rstrip()
   if len(word) >= M:
-    if word not in words:
-      words[word] = [1, len(word), word]
-    else:
+    if words.get(word):
       words[word][0] += 1
+    else:
+      words[word] = [1, len(word), word]
 words = sorted(words.values(), key=lambda x,:(-x[0],-x[1],x[2]))
 
 for word in words:
