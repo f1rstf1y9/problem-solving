@@ -1,20 +1,16 @@
-n = int(input())
-m = int(input())
-lights = list(map(int, input().split()))
-last,heights = lights[0],lights[0]
+N = int(input())
+M = int(input())
+lamps = list(map(int, input().split()))
 
-for i in range(1,len(lights)):
-    tmp = abs(last-lights[i])
-    
-    if tmp % 2 == 0:
-        tmp = tmp//2
-    else:
-        tmp = (tmp//2) + 1  
+last_lamp = lamps[0]
+height = lamps[0]
 
-    heights = max(heights, tmp)
+for i in range(1, M):
+  gap = lamps[i] - last_lamp
+  cur_height = gap//2 + gap%2
+  height = max(height, cur_height)
+  last_lamp = lamps[i]
 
-    last = lights[i]
+height = max(height, N-last_lamp)
 
-heights = max(heights, abs(n-lights[len(lights)-1]))
-
-print(heights)
+print(height)
