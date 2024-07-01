@@ -1,0 +1,74 @@
+from collections import deque
+
+M, N, O, P, Q, R, S, T, U, V, W = map(int, input().split())
+
+tomato_info = [[[[[[[[[[list(map(int, input().split())) for _ in range(N)] for _ in range(O)] for _ in range(P)] for _ in range(Q)] for _ in range(R)] for _ in range(S)] for _ in range(T)] for _ in range(U)] for _ in range(V)] for _ in range(W)]
+
+
+delta = [(-1,0,0,0,0,0,0,0,0,0,0),
+         (1,0,0,0,0,0,0,0,0,0,0),
+         (0,-1,0,0,0,0,0,0,0,0,0),
+         (0,1,0,0,0,0,0,0,0,0,0),
+         (0,0,-1,0,0,0,0,0,0,0,0),
+         (0,0,1,0,0,0,0,0,0,0,0),
+         (0,0,0,-1,0,0,0,0,0,0,0),
+         (0,0,0,1,0,0,0,0,0,0,0),
+         (0,0,0,0,-1,0,0,0,0,0,0),
+         (0,0,0,0,1,0,0,0,0,0,0),
+         (0,0,0,0,0,-1,0,0,0,0,0),
+         (0,0,0,0,0,1,0,0,0,0,0),
+         (0,0,0,0,0,0,-1,0,0,0,0),
+         (0,0,0,0,0,0,1,0,0,0,0),
+         (0,0,0,0,0,0,0,-1,0,0,0),
+         (0,0,0,0,0,0,0,1,0,0,0),
+         (0,0,0,0,0,0,0,0,-1,0,0),
+         (0,0,0,0,0,0,0,0,1,0,0),
+         (0,0,0,0,0,0,0,0,0,-1,0),
+         (0,0,0,0,0,0,0,0,0,1,0),
+         (0,0,0,0,0,0,0,0,0,0,-1),
+         (0,0,0,0,0,0,0,0,0,0,1)]
+
+queue = deque()
+
+for a in range(W):
+  for b in range(V): 
+    for c in range(U):
+      for d in range(T):
+        for e in range(S):
+          for f in range(R):
+            for g in range(Q):
+              for h in range(P):
+                for i in range(O):
+                  for j in range(N):
+                    for k in range(M):
+                      if tomato_info[a][b][c][d][e][f][g][h][i][j][k] == 1:
+                        queue.append((a,b,c,d,e,f,g,h,i,j,k,0))
+
+max_day = 0
+
+while queue:
+  w,v,u,t,s,r,q,p,o,n,m,count = queue.popleft()
+  max_day = max(max_day, count)
+  for dm, dn, do, dp, dq, dr, ds, dt, du, dv, dw in delta:
+    nm, nn, no, np, nq, nr, ns, nt, nu, nv, nw = m + dm, n + dn, o + do, p + dp, q + dq, r + dr, s + ds, t + dt, u + du, v + dv, w + dw
+    if 0 <= nm < M and 0 <= nn < N and 0 <= no < O and 0 <= np < P and 0 <= nq < Q and 0 <= nr < R and 0 <= ns < S and 0 <= nt < T and 0 <= nu < U and 0 <= nv < V and 0 <= nw < W and not tomato_info[nw][nv][nu][nt][ns][nr][nq][np][no][nn][nm]:
+        tomato_info[nw][nv][nu][nt][ns][nr][nq][np][no][nn][nm] = 1
+        queue.append((nw,nv,nu,nt,ns,nr,nq,np,no,nn,nm,count+1))
+
+def check():
+  for a in range(W):
+    for b in range(V): 
+      for c in range(U):
+        for d in range(T):
+          for e in range(S):
+            for f in range(R):
+              for g in range(Q):
+                for h in range(P):
+                  for i in range(O):
+                    for j in range(N):
+                      for k in range(M):
+                        if tomato_info[a][b][c][d][e][f][g][h][i][j][k] == 0:
+                          return False
+  return True
+
+print(max_day if check() else -1)
