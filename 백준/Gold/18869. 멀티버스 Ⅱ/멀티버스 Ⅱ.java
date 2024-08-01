@@ -11,7 +11,7 @@ public class Main {
         int m = Integer.parseInt(st.nextToken());
         int n = Integer.parseInt(st.nextToken());
 
-        ArrayList<ArrayList<Integer>> spaceList = new ArrayList<>();
+        int[][] sortedSpaceList = new int[m][n];
 
         for (int i = 0; i < m; i++) {
             ArrayList<Integer> list = new ArrayList<>();
@@ -26,17 +26,30 @@ public class Main {
             Collections.sort(sortedList);
 
             for (int j = 0; j < n; j++) {
-                int idx = Collections.binarySearch(sortedList, list.get(j));
-                list.set(j,idx);
+                int num = list.get(j);
+                int left = 0;
+                int right = n-1;
+                int mid = (int)(left + right)/2;
+                while (left <= right) {
+                    if (sortedList.get(mid) > num) {
+                        right = mid-1;
+                    } else if (sortedList.get(mid) < num) {
+                        left = mid+1;
+                    } else {
+                        sortedSpaceList[i][j] = mid;
+                        break;
+                    }
+                    mid = (int)(left + right)/2;
+                }
             }
-            spaceList.add(list);
+
         }
 
         // 똑같은 애들있는지 체크
         int count = 0;
         for (int i = 0; i < m; i++) {
             for (int j = i+1; j < m; j++) {
-                if (Arrays.equals(spaceList.get(i).toArray(), spaceList.get(j).toArray())) {
+                if (Arrays.equals(sortedSpaceList[i], sortedSpaceList[j])) {
                     count++;
                 }
             }
