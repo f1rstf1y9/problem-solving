@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 36196 KB, 시간: 68 ms
+메모리: 34088 KB, 시간: 72 ms
 
 ### 분류
 
@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2024년 10월 9일 23:57:21
+2024년 10월 10일 18:24:32
 
 ### 문제 설명
 
@@ -24,11 +24,11 @@
 
 <p>또한 한 칸에 버섯 포자를 여러 개 겹쳐서 심을 수 있으며, 만약 $x$개의 버섯 포자를 겹쳐 심으면 포자가 심어진 칸을 포함해 최대 $x \times K$개의 연결된 (버섯이 자랄 수 있는) 칸에 버섯이 자란다.</p>
 
-<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/d6cf1de2-1a5a-4185-bb45-bc37eb4e4476/-/preview/" style="height: 454px; width: 700px;"></p>
+<p style="text-align: center;"><img alt="" src="" style="height: 454px; width: 700px;"></p>
 
 <p style="text-align: center;"><그림 1> $K = 4$일 때 버섯이 자라는 모습이다.</p>
 
-<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/239f2d7b-7589-4f72-9088-993428eb234a/-/preview/" style="height: 443px; width: 700px;"></p>
+<p style="text-align: center;"><img alt="" src="" style="height: 443px; width: 700px;"></p>
 
 <p style="text-align: center;"><그림 2> $K = 10$일 때 버섯이 자라는 모습이다.</p>
 

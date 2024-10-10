@@ -1,46 +1,46 @@
-import sys, math
 from collections import deque
 
-input = sys.stdin.readline
+delta = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
-def bfs(x, y):
+def bfs(x, y, grid, visited, N): 
     queue = deque([(x, y)])
-    boards[x][y] = 1
-    areas = 1
+    visited[x][y] = True
+    component_size = 1
 
     while queue:
-        x, y = queue.popleft()
-        for i in range(4):
-            nx, ny = x + directions[i][0], y + directions[i][1]
-            if 0 <= nx < N and 0 <= ny < N and boards[nx][ny] == 0:
-                boards[nx][ny] = 1
+        cx, cy = queue.popleft()
+        
+        for dx, dy in delta:
+            nx, ny = cx + dx, cy + dy
+
+            if 0 <= nx < N and 0 <= ny < N and not visited[nx][ny] and grid[nx][ny] == 0:
+                visited[nx][ny] = True
                 queue.append((nx, ny))
-                areas += 1
+                component_size += 1
 
-    return areas
-
+    return component_size
 
 N, M, K = map(int, input().split())
+grid = [list(map(int, input().split())) for _ in range(N)]
 
-boards = [list(map(int, input().split())) for _ in range(N)]
 
-directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+visited = [[False] * N for _ in range(N)]
 
-total_nums = 0
-use_seed = False
+component_sizes = []
 
 for i in range(N):
     for j in range(N):
-        if boards[i][j] == 0:
-            areas = bfs(i, j)
-            nums = math.ceil(areas / K)
-            total_nums += nums
-            use_seed = True
+        if grid[i][j] == 0 and not visited[i][j]:
+            component_size = bfs(i, j, grid, visited, N)
+            component_sizes.append(component_size)
 
-if not use_seed:
-    print('IMPOSSIBLE')
-elif total_nums <= M:
-    print('POSSIBLE')
-    print(M - total_nums)
+spores_needed = 0
+
+for size in component_sizes:
+    spores_needed += (size + K - 1) // K
+
+if spores_needed > M or spores_needed == 0:
+    print("IMPOSSIBLE")
 else:
-    print('IMPOSSIBLE')
+    print("POSSIBLE")
+    print(M - spores_needed)
