@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 42036 KB, 시간: 104 ms
+메모리: 43968 KB, 시간: 100 ms
 
 ### 분류
 
@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2024년 3월 31일 00:06:54
+2024년 10월 19일 18:03:43
 
 ### 문제 설명
 
@@ -26,7 +26,7 @@
 
 <p>다음 그림은 예제1에 대한 설명이다.</p>
 
-<p style="text-align: center;"><img alt="" src="" style="height: 175px; width: 500px;"></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/a1f0fc3c-7c16-4108-bb18-31fe9ff3bbe4/-/preview/" style="height: 175px; width: 500px;"></p>
 
 <p>가로등의 높이가 1일 경우 0~1사이의 길이 어둡기 때문에 상빈이는 지나가지 못한다.</p>
 
