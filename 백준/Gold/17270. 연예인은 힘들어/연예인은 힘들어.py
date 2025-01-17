@@ -34,29 +34,15 @@ J, S = map(int, input().split())
 j_distances = dijkstra(J, places)
 s_distances = dijkstra(S, places)
 
-total_distances = sorted([(j_distances[i] + s_distances[i]) for i in range(1, V+1) if i != J and i != S and j_distances[i] != INF and s_distances[i] != INF])
-min_distance = total_distances[0] if total_distances else -1
-
+total_distances = [(j_distances[i] + s_distances[i], j_distances[i], i) for i in range(V+1) if i != J and i != S and j_distances[i] != float('INF') and s_distances[i] != float('INF')]
+total_distances.sort(key=lambda x:(x[0], x[1], x[2]))
 
 answer = -1
-cur_j_distance = INF
-
-for i in range(V, 0, -1):
-    # 1번 조건 : 지헌이의 출발 위치와 성하의 출발 위치는 새로운 약속 장소가 될 수 없다.
-    if i == J or i == S:
-        continue
-    
-    # 2번 조건 : 새로운 약속 장소는 지헌이가 걸리는 최단 시간과 성하가 걸리는 최단 시간의 합이 최소가 되도록 한다.
-    if j_distances[i] + s_distances[i] != min_distance:
-        continue
-    
-    # 3번 조건 : 지헌이가 성하보다 늦게 도착하는 곳은 약속 장소가 될 수 없다.
-    if j_distances[i] > s_distances[i]:
-        continue
-    
-    # 4번 조건 : 지헌이로부터 가장 가까운 곳 > 번호가 가장 작은 장소 순으로 최종 약속 장소 결정
-    if cur_j_distance > j_distances[i]:
-        cur_j_distance = j_distances[i]
-        answer = i
-    
+final_min_distance = total_distances[0][0] if total_distances else None
+for distance, _, point in total_distances:
+    if distance > final_min_distance:
+        break
+    if j_distances[point] <= s_distances[point]:
+        answer = point
+        break
 print(answer)
