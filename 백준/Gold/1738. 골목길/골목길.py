@@ -9,7 +9,7 @@ def bellman_ford(start, end):
                 parent[v] = u
     
     for u, v, w in edges:
-        if distances[u] != float('INF') and distances[u] + w < distances[v] and is_valid_cycle(v, end):
+        if distances[u] != float('INF') and distances[u] + w < distances[v] and can_reach(v, end):
             return []
     
     if distances[end] == float('INF'):
@@ -17,9 +17,10 @@ def bellman_ford(start, end):
     
     return parent
 
-def is_valid_cycle(v, end):
-    stack = [v]
+def can_reach(start, end):
+    stack = [start]
     visited = [False]*(n+1)
+    visited[start] = True
     while stack:
         cur_node = stack.pop()
         if cur_node == end:
