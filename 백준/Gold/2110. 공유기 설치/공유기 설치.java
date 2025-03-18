@@ -31,7 +31,7 @@ public class Main {
         Arrays.sort(house);
         
         int answer = 0;
-        int low = 0;
+        int low = 1;
         int high = house[house.length-1] - house[0];
         while (low <= high) {
             int mid = (low + high) / 2;
