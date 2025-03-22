@@ -11,7 +11,7 @@ def backtracking(current_value, current_idx, current_count):
     if current_value > max_value:
         max_value, max_count = current_value, current_count
         
-    if  max_count == 2**M or current_idx == N:
+    if current_idx == N:
         return
         
     backtracking(current_value | guitars[current_idx], current_idx+1, current_count+1)
